@@ -1,54 +1,138 @@
-# React + TypeScript + Vite
+# Dynamic Form Builder
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Dynamic Form Builder is a flexible and customizable form builder built with React, allowing you to create forms dynamically based on configuration. This project enables you to easily define form fields, their types, validations, and layout without having to hard-code each form component.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Dynamic form creation** based on JSON configuration.
+- Supports various input types: text, number, date, checkbox, radio, and textarea.
+- Validation rules (required fields, pattern matching, etc.) for each form field.
+- Customizable form structure (inputs and buttons).
+- Easy-to-use interface for creating forms with dynamic configurations.
+- Form data handling and validation logic are centralized for better maintainability.
 
-## Expanding the ESLint configuration
+## Technologies Used
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- React (with hooks and context)
+- TypeScript
+- CSS Modules for styling
+- Custom hook (`useFormState`) for form state management
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+## Installation
+
+To install and run the project locally, follow these steps:
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/Jakhongir-Urmonov/dynamic-form-builder.git
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+2. Navigate to the project folder:
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+```bash
+cd dynamic-form-builder
 ```
+
+3. Install the dependencies:
+
+```bash
+npm install
+```
+
+4. Start the development server:
+
+```bash
+npm start
+```
+
+The project will run on [http://localhost:3000](http://localhost:3000).
+
+## Usage
+
+1. **Configuration**: Define a form's configuration in the form of JSON with properties such as `inputs`, `buttons`, and validation rules.
+   Example:
+
+   ```json
+   {
+     "title": "My Dynamic Form",
+     "inputs": [
+       {
+         "name": "age",
+         "label": "Age",
+         "type": "numeric",
+         "validation": {
+           "required": true,
+           "pattern": "^[1-9][0-9]?$|^100$"
+         }
+       },
+       {
+         "name": "name",
+         "label": "Name",
+         "type": "string",
+         "validation": {
+           "required": true,
+           "pattern": "^[a-zA-Z ]{2,50}$"
+         }
+       }
+     ],
+     "buttons": [
+       {
+         "text": "Submit"
+       }
+     ]
+   }
+   ```
+
+2. **Rendering the Form**: The form is generated dynamically based on the configuration provided. The form fields include text, numeric, date, checkbox, radio button, and multi-line text options.
+
+3. **Validation**: Validation logic is applied based on the configuration. You can define required fields, patterns, and more.
+
+4. **Form State**: Use the `useFormState` hook to manage form data, errors, and submission state. The form state is automatically updated as users interact with the form.
+
+## How It Works
+
+1. The form configuration is passed into the `DynamicForm` component.
+2. The configuration specifies the input fields, their types, validation rules, and button configurations.
+3. The form is rendered dynamically using React’s state and context management.
+4. The form supports validation on change, and errors are displayed next to invalid fields.
+5. Upon form submission, the form data is logged or processed accordingly.
+
+## Example Usage
+
+```tsx
+import React from "react";
+import { DynamicForm } from "dynamic-form-builder";
+import { useFormState } from "./hooks/useFormState";
+
+const App = () => {
+  const { state, dispatch } = useFormState();
+
+  return (
+    <div>
+      <DynamicForm formState={{ state, dispatch }} />
+    </div>
+  );
+};
+
+export default App;
+```
+
+## Available Input Types
+
+- **String**: A simple text input field.
+- **Numeric**: A field for numeric input.
+- **Multi-line**: A textarea for longer input.
+- **Boolean**: A checkbox (true/false).
+- **Date**: A date picker input.
+- **Enum**: A set of radio buttons for predefined choices.
+
+## Contributing
+
+We welcome contributions to improve this project! To contribute, follow these steps:
+
+1. Fork the repository.
+2. Create a new branch for your changes.
+3. Make your changes, ensuring they don't break existing functionality.
+4. Commit your changes and push them to your forked repository.
+5. Open a pull request with a description of your changes.
