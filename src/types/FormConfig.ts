@@ -1,4 +1,4 @@
-export type FieldType =
+export type InputType =
   | "numeric"
   | "string"
   | "multi-line"
@@ -6,11 +6,15 @@ export type FieldType =
   | "date"
   | "enum";
 
-export interface FieldConfig {
+export interface InputConfig {
   name: string;
   label: string;
-  type: FieldType;
-  options?: string[]; // Only for enum fields
+  type: InputType;
+  options?: string[]; // Only for enum Inputs
+  validation?: {
+    required?: boolean;
+    pattern?: string;
+  };
 }
 
 export interface ButtonConfig {
@@ -19,6 +23,6 @@ export interface ButtonConfig {
 
 export interface FormConfig {
   title: string;
-  fields: FieldConfig[];
+  inputs: InputConfig[];
   buttons: ButtonConfig[];
 }
