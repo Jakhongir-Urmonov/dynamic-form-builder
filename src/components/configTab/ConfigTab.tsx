@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import styles from "./ConfigTab.module.css";
 import { useFormState } from "../../hooks/useFormState";
-import { FormConfig } from "../../types/FormConfig";
+import { FormConfig, InputTypeEnum } from "../../types/FormConfig";
 
 const ConfigTab: React.FC<{ formState: ReturnType<typeof useFormState> }> = ({
   formState,
@@ -44,14 +44,7 @@ const ConfigTab: React.FC<{ formState: ReturnType<typeof useFormState> }> = ({
         !input.label ||
         typeof input.label !== "string" ||
         !input.type ||
-        ![
-          "numeric",
-          "string",
-          "multi-line",
-          "boolean",
-          "date",
-          "enum",
-        ].includes(input.type)
+        !Object.values(InputTypeEnum).includes(input.type as InputTypeEnum)
       ) {
         return `Invalid input field: ${JSON.stringify(input)}`;
       }

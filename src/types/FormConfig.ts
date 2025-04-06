@@ -1,10 +1,21 @@
-export type InputType =
-  | "numeric"
-  | "string"
-  | "multi-line"
-  | "boolean"
-  | "date"
-  | "enum";
+// export type InputType =
+//   | "numeric"
+//   | "string"
+//   | "multi-line"
+//   | "boolean"
+//   | "date"
+//   | "enum";
+
+export enum InputTypeEnum {
+  NUMERIC = "numeric",
+  STRING = "string",
+  MULTILINE = "multi-line",
+  BOOLEAN = "boolean",
+  DATE = "date",
+  ENUM = "enum",
+}
+
+export type InputType = `${InputTypeEnum}`;
 
 export interface InputConfig {
   name: string;

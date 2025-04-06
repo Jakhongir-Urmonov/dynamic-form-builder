@@ -1,5 +1,5 @@
 import { useReducer } from "react";
-import { FormConfig } from "../types/FormConfig";
+import { FormConfig, InputTypeEnum } from "../types/FormConfig";
 
 export interface FormState {
   fields: FormConfig;
@@ -32,32 +32,32 @@ const initialFields: FormConfig = {
     {
       name: "age",
       label: "Age",
-      type: "numeric",
+      type: InputTypeEnum.NUMERIC,
       validation: { required: true, pattern: "^[1-9][0-9]?$|^100$" },
     },
     {
       name: "name",
       label: "Name",
-      type: "string",
+      type: InputTypeEnum.STRING,
       validation: { required: true, pattern: "^[a-zA-Z ]{2,50}$" },
     },
     {
       name: "bio",
       label: "Biography",
-      type: "multi-line",
+      type: InputTypeEnum.MULTILINE,
       validation: { required: false, pattern: "^.{0,300}$" },
     },
     { name: "subscribe", label: "Subscribe to Newsletter", type: "boolean" },
     {
       name: "birthday",
       label: "Birthday",
-      type: "date",
+      type: InputTypeEnum.DATE,
       validation: { required: true },
     },
     {
       name: "gender",
       label: "Gender",
-      type: "enum",
+      type: InputTypeEnum.ENUM,
       options: ["Male", "Female", "Other"],
       validation: { required: true },
     },

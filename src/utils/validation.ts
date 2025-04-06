@@ -1,4 +1,4 @@
-import { InputConfig } from "../types/FormConfig";
+import { InputConfig, InputTypeEnum } from "../types/FormConfig";
 
 export interface ValidationResult {
   isValid: boolean;
@@ -31,13 +31,13 @@ export const validateFormValues = (
 
     // Type-specific validation
     switch (input.type) {
-      case "numeric":
+      case InputTypeEnum.NUMERIC:
         if (value && isNaN(Number(value))) {
           errors[input.name] = "Must be a number";
           isValid = false;
         }
         break;
-      case "date":
+      case InputTypeEnum.DATE:
         if (value && isNaN(Date.parse(value))) {
           errors[input.name] = "Invalid date";
           isValid = false;

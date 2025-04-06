@@ -2,6 +2,7 @@ import React from "react";
 import { render, screen, fireEvent } from "@testing-library/react";
 import FormGenerator from "./FormGenerator";
 import { useFormState } from "../../hooks/useFormState";
+import { InputTypeEnum } from "../../types/FormConfig";
 
 // Mock the useFormState hook
 jest.mock("../../hooks/useFormState");
@@ -17,7 +18,7 @@ describe("FormGenerator", () => {
           {
             name: "testField",
             label: "Test Field",
-            type: "string",
+            type: InputTypeEnum.STRING,
             validation: { required: true },
           },
         ],
